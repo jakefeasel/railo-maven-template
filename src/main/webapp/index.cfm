@@ -1,3 +1,3 @@
-<a href="/railo-context/admin/web.xml">Railo Admin</a>
+<a href="/railo-context/admin/web.cfm">Railo Admin</a>
 <hr>
 <cfdump var="#server#">
