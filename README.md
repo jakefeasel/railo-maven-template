@@ -1,7 +1,7 @@
 railo-maven-template
 ====================
 
-Quickly use the [Railo](http://www.getrailo.org) ColdFusion system from with [Maven](http://maven.apache.org/) and [Jetty](http://jetty.codehaus.org/jetty/).
+Quickly use the [Railo](http://www.getrailo.org) ColdFusion system with [Maven](http://maven.apache.org/) and [Jetty](http://jetty.codehaus.org/jetty/).
 
 ##Usage
 
