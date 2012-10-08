@@ -19,4 +19,4 @@ You will want to edit the pom.xml, changing these values:
 
 to something specific to your project.  Also, you'll want to set the Railo Admin password right away.  Here's the link to get there, once you have Jetty running:
 
-    (Local Railo Admin)[http://localhost:8080/railo-context/admin/web.cfm]
+    [Local Railo Admin](http://localhost:8080/railo-context/admin/web.cfm)
