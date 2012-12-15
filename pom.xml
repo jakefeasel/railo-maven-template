@@ -1,55 +1,121 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-  <modelVersion>4.0.0</modelVersion>
-
-  <groupId>org.yourorg</groupId>
-  <artifactId>railo-maven-template</artifactId>
-  <version>1.0-SNAPSHOT</version>
-  <packaging>war</packaging>
-
-  <name>railo-maven-template</name>
-  <url>http://maven.apache.org</url>
-
-  <properties>
+<?xml version="1.0"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<modelVersion>4.0.0</modelVersion>
+<groupId>org.yourorg</groupId>
+<artifactId>railo-maven-template</artifactId>
+<version>1.0-SNAPSHOT</version>
+<packaging>war</packaging>
+<name>railo-maven-template</name>
+<url>http://maven.apache.org</url>
+<properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-  </properties>
-
-	<dependencies>
-		<dependency>
-			<groupId>org.getrailo</groupId>
-			<artifactId>railo</artifactId>
-			<version>3.3.5.004</version>
-		</dependency>
-	</dependencies>
-  <build>
-      <plugins>
-
-<plugin>
-  <groupId>org.mortbay.jetty</groupId>
-  <artifactId>jetty-maven-plugin</artifactId>
-  <version>8.1.3.v20120416</version>
-
-  <configuration>
-    <scanIntervalSeconds>10</scanIntervalSeconds>
-    <contextPath>/</contextPath>
-  </configuration>
-
-</plugin>
-
+    <railoVersion>3.3.5.004</railoVersion>
+</properties>
+<dependencies>
+    <dependency>
+        <groupId>org.getrailo</groupId>
+        <artifactId>railo</artifactId>
+        <version>${railoVersion}</version>
+    </dependency>
+    <dependency>
+        <groupId>junit</groupId>
+        <artifactId>junit</artifactId>
+        <version>4.8.1</version>
+        <scope>test</scope>
+    </dependency>
+    <dependency>
+        <groupId>org.seleniumhq.selenium</groupId>
+        <artifactId>selenium-java</artifactId>
+        <version>2.25.0</version>
+    </dependency>
+    <dependency>
+        <groupId>org.seleniumhq.selenium</groupId>
+        <artifactId>selenium-firefox-driver</artifactId>
+        <version>2.25.0</version>
+    </dependency>
+</dependencies>
+<build>
+    <plugins>
+        <plugin>
+            <groupId>org.mortbay.jetty</groupId>
+            <artifactId>jetty-maven-plugin</artifactId>
+            <version>8.1.3.v20120416</version>
+            <configuration>
+                <scanIntervalSeconds>10</scanIntervalSeconds>
+                <contextPath>/</contextPath>
+                <stopPort>9966</stopPort>
+                <stopKey>STOP</stopKey>
+            </configuration>
+            <executions>
+                <execution>
+                    <id>start-jetty</id>
+                    <phase>pre-integration-test</phase>
+                    <goals>
+                        <goal>run</goal>
+                    </goals>
+                    <configuration>
+                        <daemon>true</daemon>
+                    </configuration>
+                </execution>
+                <execution>
+                    <id>stop-jetty</id>
+                    <phase>post-integration-test</phase>
+                    <goals>
+                        <goal>stop</goal>
+                    </goals>
+                </execution>
+            </executions>
+        </plugin>
+        <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-antrun-plugin</artifactId>
+            <version>1.7</version>
+            <executions>
+                <execution>
+                    <phase> validate </phase>
+                    <configuration>
+                        <target>
+                            <copy file="src/main/webapp/WEB-INF/web.xml.example" tofile="src/main/webapp/WEB-INF/web.xml" overwrite="false"/>
+                            <copy file="railo-server.xml.example" tofile="${settings.localRepository}/org/getrailo/railo/${railoVersion}/railo-server/context/railo-server.xml" overwrite="false"/>
+                        </target>
+                    </configuration>
+                    <goals>
+                        <goal>run</goal>
+                    </goals>
+                </execution>
+            </executions>
+        </plugin>
+        <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-failsafe-plugin</artifactId>
+            <version>2.12.4</version>
+            <executions>
+                <execution>
+                    <id>integration-test</id>
+                    <goals>
+                        <goal>integration-test</goal>
+                    </goals>
+                </execution>
+                <execution>
+                    <id>verify</id>
+                    <goals>
+                        <goal>verify</goal>
+                    </goals>
+                </execution>
+            </executions>
+        </plugin>
     </plugins>
-  </build>
-
-	<repositories>
-		<repository>
-			<id>cfmlprojects.org</id>
-			<url>http://cfmlprojects.org/artifacts</url>
-			<releases>
-				<enabled>true</enabled>
-			</releases>
-			<snapshots>
-				<enabled>true</enabled>
-			</snapshots>
-		</repository>
-	</repositories>
-
+</build>
+<repositories>
+    <repository>
+        <id>cfmlprojects.org</id>
+        <url>http://cfmlprojects.org/artifacts</url>
+        <releases>
+            <enabled>true</enabled>
+        </releases>
+        <snapshots>
+            <enabled>true</enabled>
+        </snapshots>
+    </repository>
+</repositories>
 </project>
