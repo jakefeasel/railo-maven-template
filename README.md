@@ -1,6 +1,8 @@
 railo-maven-template
 ====================
 
+[![Build Status](https://travis-ci.org/jakefeasel/railo-maven-template.png)](https://travis-ci.org/jakefeasel/railo-maven-template)
+
 Fork this template project to quickly use the [Railo](http://www.getrailo.org) ColdFusion system with [Maven](http://maven.apache.org/) and [Jetty](http://jetty.codehaus.org/jetty/).
 
 ##Usage
