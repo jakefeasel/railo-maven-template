@@ -29,3 +29,5 @@ to something specific to your project.  Also, you'll want to set the Railo Admin
 The maven project has been configured to support selenium integration tests, with an included example test.  To run the tests, simply run this:
 
     mvn integration-test
+
+These tests will also work with Travis-CI, so you can automatically verify that your site passes all tests.  All you have to do is enable your fork of this project to use Travis-CI.  See details for doing that on the [Travis-CI Getting Started Guide](http://about.travis-ci.org/docs/user/getting-started/).  All you will need to do is steps one and two in that guide - the rest is already done for you.
